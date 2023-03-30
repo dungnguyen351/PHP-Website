@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "model/cart.php";
     include "model/pdo.php";
     include "model/sanpham.php";
     include "model/danhmuc.php";
@@ -149,10 +150,36 @@
                 break;
 
             case 'billcomfirm':
+                //taoj bill
+                if(isset($_POST['dongydathang'])&&($_POST['dongydathang'])){
+                    if(isset($_SESSION['user'])) $iduser=$_SESSION['user']['id'];
+                    else $id=0;
+                    $user=$_POST['user'];
+                    $email=$_POST['email'];
+                    $address=$_POST['address'];
+                    $tel=$_POST['tel'];
+                    $pttt=$_POST['pttt'];
+                    $ngaydathang=date('h:i:sa d/m/Y');
+                    $tongdonhang=tongdonhang();
+
+                    $idbill= insert_bill($iduser,$user,$email,$address,$tel,$pttt,$ngaydathang,$tongdonhang);
+
+                    //insert into cart : $session'[mycart'] & idbill
+                    foreach ($_SESSION['mycart'] as $cart) {
+                        insert_cart($_SESSION['user']['id'],$cart[0],$cart[2],$cart[1],$cart[3],$cart[4],$cart[5],$idbill);
+                    }
+                    //xoa session cart
+                    $_SESSION['cart']=[];
+                }
+
+                $bill=loadone_bill($idbill);
+                $billct=loadall_cart($idbill);
                 include "view/cart/billcomfirm.php";
                 break;
 
             case 'mybill':
+                $listbill=loadall_bill($_SESSION['user']['id']);
+
                 include "view/cart/mybill.php";
                 break;
             /*----------------------------------------------*/

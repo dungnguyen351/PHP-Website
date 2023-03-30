@@ -58,38 +58,15 @@
                 <div class="boxtitle">THÔNG TIN GIỎ HÀNG</div>
                 <div class="row boxcontent cart">
                     <table>
-                        <tr>
-                            <th>STT</th>
-                            <th>Hình</th>
-                            <th>Sản phẩm</th>
-                            <th>Đơn giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            <th>Thao tác</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="../images/hinh22.jpg" alt="" height="80px"></td>
-                            <td>Đồng hồ</td>
-                            <td>50</td>
-                            <td>2</td>
-                            <td>200.000</td>
-
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="../images/hinh22.jpg" alt="" height="80px"></td>
-                            <td>Đồng hồ</td>
-                            <td>50</td>
-                            <td>2</td>
-                            <td>200.000</td>
-
-                        </tr>
+                        
+                        <?php 
+                          viewcart(0);
+                        ?>
                     </table>
                 </div>
             </div>
             <div class="row mb bill">
-                <input type="submit" value="Đồng ý đặt hàng">
+                <input type="submit" value="Đồng ý đặt hàng" name="dongydathang">
             </div>
 
         </form>
